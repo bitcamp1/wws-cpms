@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReceiptMapper">
+	<select id="selectAllReceipts" parameterType="map" resultType="Receipt">
+		SELECT
+			rcpt_seq as rcptSeq,
+			open_date as openDate,
+			rcpt_date as rcptDate,
+			cust_name as custName,
+			confirm_num as confirmNum,
+			rcpt_type as rcptType,
+			calc_price as calcPrice,
+			noncalc_price as nonCalcPrice,
+			calc_yn as calcYn,
+			agency_name as agencyName,
+			shop_name as shopName,
+			rcpt_memo as memo
+		FROM receipt
+		ORDER BY rcpt_seq DESC
+		limit #{startIdx}, #{limit};
+			
+	</select>
+	<select id="countReceipts" resultType="int">
+		SELECT count(*)
+		FROM receipt
+	</select>
+</mapper>

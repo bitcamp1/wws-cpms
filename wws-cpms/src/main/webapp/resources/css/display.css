@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+.w100{width:100%;}
+.h100{height:100%;}
+.zindex{z-index:10;}
+.pointer{cursor:pointer;}
+.block{display:block;}
+.inline{display:inline;}
+.none{display:none;}
+.inline-block{display:inline-block;}
+.table{
+	width: 100%;
+	margin : 0;
+	padding : 0;
+	list-style:none;
+	dispaly:table;
+	
+}
+.table-cell{display:table-cell;}
+.float-left{float:left;}
+.float-right{float:right;}
+.both-clear{both:clear;}
+.auto{margin: 0 auto;}
+.center{text-align:center;}

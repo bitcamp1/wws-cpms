@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeadlineMapper">
+	<select id="selectAllDeadlines" parameterType="map" resultType="Deadline">
+	SELECT 
+		dline_seq as dlineSeq,
+		dline_regdate as dlineRegDate,
+		shop_name as shopName,
+		policy as policy,
+		rebate as rebate,
+		commission as commission,
+		margin as margin,
+		open_new as openNew,
+		open_mnp as openMnp,
+		open_change as openChange,
+		open_reward as openReward
+	FROM deadline 
+	ORDER BY dline_seq DESC
+	limit #{startIdx},#{limit}
+	</select>
+	<select id="countDeadlines" resultType="int">
+		SELECT 
+			count(*)
+		FROM deadline
+	</select>
+</mapper>

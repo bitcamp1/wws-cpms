@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CustomerMapper">
+	<sql id="refidTest">
+		select * from customer
+	</sql>
+	<insert id="inputCustData" parameterType="Customer">
+	 	INSERT INTO customer (
+		 	cust_name,
+		 	cust_num
+	 	)VALUES(
+	 		#{custName},
+	 		#{custNum}
+	 	)
+	 	<selectKey keyProperty="custSeq" resultType="int" order="AFTER">
+	 		SELECT LAST_INSERT_ID();
+	 	</selectKey>
+	 	
+	 </insert>
+	 <insert id="insertFullData" parameterType="map">
+	 	<selectKey keyProperty="custSeq" resultType="int" order="BEFORE">
+	 		<include refid="refidTest"/>
+	 	</selectKey>
+	 	INSERT INTO customer (
+	 		cust_seq
+	 	)VALUES(
+	 		(#{custSeq})
+	 	);
+	 	
+	 </insert>
+	 
+	 
+ 	<!-- <select id="getCustDetail" parameterType="int" resultType="com.cpms.web.data.JoinData">
+	 SELECT 
+				CU.cust_seq as custSeq
+				FROM customer CU
+				WHERE cust_seq=#{id}
+	  </select> 
+	  -->
+	  <select id="getCustDetail" parameterType="int" resultType="com.cpms.web.data.JoinData">
+	 		SELECT 
+				CU.cust_seq as custSeq,
+				CU.cust_regdate as custRegDate,
+		 	 	CU.cust_name as custName,
+		 	 	CU.cust_phone as custPhone,
+		 	 	CU.cust_num as custNum,
+		 	 	CU.cust_telnum as custTelnum,
+		 	 	CU.cust_birth as custBirth,
+		 	 	JU.do_city as doCity,
+		  	 	JU.si_gu_gun as siGuGun,
+		  	 	JU.dong ,
+		  	 	JU.doro_name as doroName,
+		  	 	JU.juso_detail as jusoDetail,
+		  	 	JU.zip_code as zipCode, 
+		 	 	SH.shop_name as shopName,
+		 	 	PH.phone_brand as phoneBrand,
+		 	 	PH.phone_name as phoneName,
+		 	 	PH.phone_model as phoneModel,
+		 	 	PH.phone_price as phonePrice,
+		 	 	PH.phone_color as phoneColor,
+		 	 	PH.telecom,
+		 	 	US.usim_model as usimModel,
+		 	 	US.usim_num as usimNum,
+		 	 	US.usim_paytime as usimPaytime,
+		 	 	US.usim_price as usimPrice,
+		 	 	DE.serial_num as serialNum,
+		 	 	DE.invoice_num as invoiceNum,
+		 	 	DE.deli_type as deliType,
+		 	 	DEJU.do_city as d_doCity,
+		  	 	DEJU.si_gu_gun as d_siGuGun,
+		  	 	DEJU.dong as d_dong,
+		  	 	DEJU.doro_name as d_doroName,
+		  	 	DEJU.juso_detail as d_jusoDetail,
+		  	 	DEJU.zip_code as d_zipCode,
+		  	 	PY.pay_type as payType,
+		  	 	PY.acc_owner as accOwner,
+		  	 	PY.acc_owner_cust_num as accOwnerCustNum,
+		  	 	PY.bank_name as bankName,
+		  	 	PY.acc_num as accNum,
+		  	 	PY.card_sa as cardSa,
+		  	 	PY.card_owner as cardOwner,
+		  	 	PY.card_num as cardNum,
+		  	 	PY.card_yymm as cardYYmm,
+		  	 	TA.tff_name as tffName,
+		  	 	TA.join_type as joinType,
+		  	 	TA.join_fee as joinFee,
+		  	 	TA.halbu_wol as halbuWol,
+		  	 	TA.bosang_level as bosangLevel,
+		  	 	TA.yakjung,
+		  	 	TA.halin_type as halinType,
+		  	 	TA.halbu_kumak as halbuKumak,
+		  	 	TA.halbu_wonkum as halbuWonkum,
+		  	 	TA.buga_service as bugaService,
+		  	 	OT.o_telecom,
+		  	 	OT.o_telnum,
+		  	 	OT.o_hope_num as o_hopeNum,
+		  	 	OT.o_bohoja,
+		  	 	OT.o_applier,
+		  	 	OT.o_memo,
+		  	 	OT.o_mibi_doc as o_mibiDoc
+		 	 	
+		 	 	
+		 	 
+	 	FROM customer CU
+	 	LEFT JOIN juso JU
+	 	ON CU.juso_seq = JU.juso_seq
+	 	LEFT JOIN shop SH
+	 	ON SH.shop_seq = CU.shop_seq
+	 	LEFT JOIN phone PH
+	 	ON CU.cust_seq = PH.cust_seq
+	 	LEFT JOIN usim US
+	 	ON CU.cust_seq = US.cust_seq
+	 	LEFT JOIN delivery DE
+	 	ON CU.cust_seq = DE.cust_seq
+	 	LEFT JOIN juso DEJU
+	 	ON DEJU.juso_seq = DE.juso_seq
+	 	LEFT JOIN pay PY
+	 	ON CU.cust_seq = PY.cust_seq
+	 	LEFT JOIN tariff TA
+	 	ON CU.cust_seq = TA.cust_seq
+	 	LEFT JOIN other OT
+	 	ON CU.cust_seq = OT.cust_seq
+	 	
+	 	WHERE CU.cust_seq=#{id}
+	 
+	 </select> 
+	 
+	 <select id="selectAllCustomers" parameterType="map" resultType="Customer">
+		 	SELECT 
+				cust_seq as custSeq,
+				cust_regdate as custRegDate,
+		 	 	<!-- shop_name as shopName, -->
+		 	 	cust_name as custName,
+		 	 	cust_phone as custPhone,
+		 	 	cust_num as custNum
+		 	 	<!-- phone_model as phoneModel, -->
+		 	 	<!-- tot_price as totPrice, -->
+		 	 	<!-- prog_stat as progStat, -->
+		 	 	<!-- open_yn as openYn,
+		 	 	cancle_yn as cancleYn, -->
+		 	 	<!-- telecom -->
+	 	FROM customer
+	 	ORDER BY cust_seq DESC
+	 	limit #{startIdx},#{limit}
+	 	
+	 	
+	 </select>
+	 <select id="countCustomers" resultType="int">
+	 	SELECT count(*)
+	 	FROM customer
+	 </select>
+</mapper>

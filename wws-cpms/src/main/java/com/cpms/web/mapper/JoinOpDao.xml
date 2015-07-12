@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JoinOpMapper">
+	<select id="getJoinOpList" parameterType="map" resultType="JoinOp">
+		SELECT 
+			joinop_seq as joinOpSeq,
+				joinop_title as joinOpTitle,
+				joinop_text1 as joinOpText1,
+				joinop_text2 as joinOpText2,
+				joinop_text3 as joinOpText3,
+				joinop_text4 as joinOpText4,
+				joinop_text5 as joinOptext5
+			FROM joinop
+		 	WHERE joinop_title = #{title}
+		 	AND telecom = #{telecom}
+	</select>
+	
+	<select id="getTariffList" parameterType="map" resultType="JoinOp">
+		 	SELECT 
+				joinop_seq as joinOpSeq,
+				joinop_title as joinOpTitle,
+				joinop_text1 as joinOpText1,
+				joinop_text2 as joinOpText2,
+				joinop_text3 as joinOpText3,
+				joinop_text4 as joinOpText4,
+				joinop_text5 as joinOptext5
+	 	FROM joinop
+	 	WHERE joinop_title = #{title}
+	 	AND telecom = #{telecom}
+	 	
+	 	
+	 </select>
+	 <insert id="registJoinOp" parameterType="map">
+	 	INSERT joinop SET
+	 		joinop_title = #{joinOpTitle},
+	 		joinop_text1 = #{joinOpText1},
+	 		joinop_text2 = #{joinOpText2},
+	 		joinop_text3 = #{joinOpText3},
+	 		joinop_text4 = #{joinOpText4},
+	 		joinop_text5 = #{joinOpText5}
+	 	
+	 	
+	 </insert>
+</mapper>

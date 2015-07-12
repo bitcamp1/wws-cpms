@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+ <c:set var="HOME" value="${pageContext.request.contextPath}"/>
+<%--  <c:set var="IMG" value="${HOME}/img"/>
+ <c:set var="JS" value="${HOME}/js"/>
+ <c:set var="CSS" value="${HOME}/css"/>
+ <c:set var="JQ_LIB" value="${HOME}/jq_lib"/>
+ <c:set var="JQ_CSS" value="${HOME}/jq_css"/>
+ <c:set var="IMAGES" value="${JQ_CSS}/images"/> --%>
+ 
+ <c:set var="RSC" value="${HOME}/resources"/>
+ <c:set var="IMG" value="${RSC}/img"/>
+ <c:set var="JS" value="${RSC}/js"/>
+ <c:set var="CSS" value="${RSC}/css"/>
+ <c:set var="JQ_LIB" value="${RSC}/jq_lib"/>
+ <c:set var="JQ_CSS" value="${RSC}/jq_css"/>
+ <c:set var="IMAGES" value="${JQ_CSS}/images"/>
+    

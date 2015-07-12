@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PolicyMapper">
+	<select id="selectAllCommissions" parameterType="map" resultType="Commission">
+		SELECT
+			cmmss_seq as cmmssSeq,
+			cmmss_num as cmmssNum,
+			cmmss_startdate as cmmssStartDate,
+			cmmss_enddate as cmmssEndDate,
+			cmmss_memo as cmmssMemo
+		FROM commission
+		ORDER BY cmmss_seq DESC
+		LIMIT #{startIdx},#{limit}
+	</select>
+	<select id="countCommissions" resultType="int">
+		SELECT count(*) 
+		FROM commission
+	</select>
+	<select id="selectAllDeductions" parameterType="map" resultType="Deduction">
+		SELECT
+			deduct_seq as deductSeq,
+			deduct_num as rebateNum,
+			deduct_startdate as deductStartDate,
+			deduct_enddate as deductEndDate,
+			deduct_memo as deductMemo
+		FROM deduction
+		ORDER BY deduct_seq DESC
+		LIMIT #{startIdx},#{limit}
+	</select>
+	<select id="countDeductions" resultType="int">
+		SELECT count(*) 
+		FROM deduction
+	</select>
+	<select id="selectAllRebates" parameterType="map" resultType="Rebate">
+		SELECT
+			rebate_seq as rebateSeq,
+			rebate_num as rebateNum,
+			rebate_startdate as startDate,
+			rebate_enddate as endDate,
+			rebate_memo as rebateMemo
+		FROM rebate
+		ORDER BY rebate_seq DESC
+		LIMIT #{startIdx},#{limit}
+	</select>
+	<select id="countRebates" resultType="int">
+		SELECT count(*) 
+		FROM rebate
+	</select>
+</mapper>

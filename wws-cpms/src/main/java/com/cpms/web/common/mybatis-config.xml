@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC
+  "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <typeAliases>
+    <typeAlias type="com.cpms.web.dto.UserDto" alias="User" />
+    <typeAlias type="com.cpms.web.dto.CreditRetrieverDto" alias="CreditRetriever" />
+    <typeAlias type="com.cpms.web.dto.CustomerDto" alias="Customer" />
+    <typeAlias type="com.cpms.web.dto.DeadlineDto" alias="Deadline" />
+    <typeAlias type="com.cpms.web.dto.DeliveryDto" alias="Delivery" />
+    <typeAlias type="com.cpms.web.dto.PhoneDto" alias="Phone" />
+    <typeAlias type="com.cpms.web.dto.InventoryDto" alias="Inventory" />
+    <typeAlias type="com.cpms.web.dto.ReceiptDto" alias="Receipt" />
+    <typeAlias type="com.cpms.web.dto.RebateDto" alias="Rebate" />
+    <typeAlias type="com.cpms.web.dto.DeductionDto" alias="Deduction" />
+    <typeAlias type="com.cpms.web.dto.CommissionDto" alias="Commission" />
+    <typeAlias type="com.cpms.web.dto.ShopDto" alias="Shop" />
+    <typeAlias type="com.cpms.web.dto.EmployeeDto" alias="Employee" />
+    <typeAlias type="com.cpms.web.dto.JusoDto" alias="Juso" />
+    <typeAlias type="com.cpms.web.dto.JoinOpDto" alias="JoinOp" />
+  </typeAliases>
+   <environments default="development">
+      <environment id="development">
+          <transactionManager type="JDBC" />
+          <dataSource type="POOLED">
+              <property name="driver" value="com.mysql.jdbc.Driver" />
+              
+              <property name="url" value="jdbc:mysql://localhost/cpms" />
+              <property name="username" value="root" />
+              <property name="password" value="root" /> 
+               <!--  
+               <property name="url" value="jdbc:mysql://localhost/whitews1" />
+              <property name="username" value="whitews1" />
+              <property name="password" value="wwss+1016" />
+             -->
+          </dataSource>
+      </environment>
+  </environments>
+  <mappers>
+    <mapper resource="com/cpms/web/mapper/CreditRetrieverDao.xml" />
+    <mapper resource="com/cpms/web/mapper/CustomerDao.xml" />
+    <mapper resource="com/cpms/web/mapper/DeadlineDao.xml" />
+    <mapper resource="com/cpms/web/mapper/UserDao.xml" />
+    <mapper resource="com/cpms/web/mapper/DeliveryDao.xml" />
+    <mapper resource="com/cpms/web/mapper/ProductDao.xml" />
+    <mapper resource="com/cpms/web/mapper/ReceiptDao.xml" />
+    <mapper resource="com/cpms/web/mapper/PolicyDao.xml" />
+    <mapper resource="com/cpms/web/mapper/ShopDao.xml" />
+    <mapper resource="com/cpms/web/mapper/JoinOpDao.xml" />
+  </mappers>
+</configuration>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+	<insert id="addPhone" parameterType="Phone">
+		INSERT INTO phone(phone_brand,phone_name,phone_model,phone_price,telecom)
+		VALUES(#{phoneBrand},#{phoneName},#{phoneModel},#{phonePrice},#{telecom})
+	</insert>
+	
+	<select id="selectAllInventories" parameterType="map" resultType="Inventory">
+		SELECT 
+		inv_seq as invSeq,
+		inv_regdate as invRegDate,
+		import_num as importNum,
+		export_num as exportNum,
+		return_num as returnNum,
+		poor_num as poorNum,
+		loss_num as lossNum,
+		stock_num as stockNum,
+		tx_invoice as txInvoice,
+		return_invoice as returnInvoice
+	FROM inventory 
+	ORDER BY inv_seq DESC
+	limit #{startIdx},#{limit};
+	</select>
+	<select id="countInventories" resultType="int">
+		SELECT 
+			count(*)
+		FROM inventory
+	</select>
+	<select id="selectAllPhones" parameterType="map" resultType="Phone">
+	SELECT 
+		phone_brand as phoneBrand,
+		phone_name as phoneName,
+		phone_model as phoneModel,
+		phone_price as phonePrice,
+		telecom as telecom
+	FROM phone 
+	limit #{startIdx},#{limit}
+	</select>
+	<select id="countPhones" resultType="int">
+		SELECT 
+			count(*)
+		FROM phone
+	</select>
+</mapper>

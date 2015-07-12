@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShopMapper">
+	  
+	  <select id="getShopDetail" parameterType="int" resultType="com.cpms.web.data.ShopJusoData">
+  	 	SELECT 
+	  	 	s.shop_name as shopName,
+	  	 	s.shop_regdate as shopRegDate,
+	  	 	s.shop_seq as shopSeq,
+	  	 	s.shop_pw as shopPw,
+	  	 	s.shop_phone as shopPhone,
+	  	 	s.shop_fax as shopFax,
+	  	 	s.sale_type as saleType,
+	  	 	s.shop_level as shopLevel,
+	  		s.juso_seq as jusoSeq,
+	  		j.do_city as doCity,
+	  	 	j.si_gu_gun as siGuGun,
+	  	 	j.dong ,
+	  	 	j.doro_name as doroName,
+	  	 	j.juso_detail as jusoDetail,
+	  	 	j.zip_code as zipCode
+	  
+	  		
+  	 	FROM shop s
+  	 	LEFT JOIN juso j
+  	 	ON s.juso_seq = j.juso_seq
+  	 	WHERE shop_seq=#{shopSeq} 
+  	 </select>
+
+	  <select id="getShopBySeq" parameterType="int" resultType="Shop">
+  	 	SELECT shop_name as shopName
+  	 	FROM shop
+  	 	WHERE shop_seq=#{shopSeq} 
+  	 </select>
+	  
+	  <select id="existsShopSeq" parameterType="Shop" resultType="int">
+  	 	SELECT shop_seq as shopSeq
+  	 	FROM shop
+  	 	WHERE shop_seq=#{shopSeq} and shop_pw=#{shopPw}
+  	 </select>
+	 <select id="checkExistedSeq" parameterType="int" resultType="int">
+  	 	SELECT shop_seq as shopSeq
+  	 	FROM shop
+  	 	WHERE shop_seq=#{shop_seq}
+  	 </select>
+	
+	<select id="selectShopSeqByName" parameterType="string" resultType="int">
+		select 
+			shop_seq as shopSeq
+			from
+			shop
+			where shop_name=#{shopName}
+	</select>
+	
+	<select id="selectAllEmployees" parameterType="map" resultType="Employee">
+		select 
+			emp_seq as empSeq,
+			emp_regdate as empRegDate,
+			emp_position as empPosition,
+			emp_name as empName,
+			emp_id as empId,
+			emp_pw as empPw,
+			emp_phone as empPhone,
+			emp_email as empEmail,
+			emp_memo as empMemo,
+			shop_seq as shopSeq
+		from 
+		employee
+		ORDER BY emp_seq DESC
+				LIMIT #{startIdx},#{limit}
+	</select>
+	<select id="countEmployees" resultType="int">
+		SELECT count(*)
+		FROM employee
+	</select>
+	
+	
+	<select id="selectAllSubShops" parameterType="map" resultType="Shop">
+		SELECT 
+			shop_seq as shopSeq,
+			shop_regdate as shopRegDate,
+			shop_name as shopName,
+			shop_pw as shopPw,
+			shop_phone as shopPhone,
+			shop_fax as shopFax,
+			juso_seq as jusoSeq,
+			shop_level as shopLevel,
+			sale_type as saleType	
+		FROM	shop
+		ORDER BY shop_seq  DESC
+		LIMIT #{startIdx},#{limit}
+	</select>
+	<select id="countSubShops" resultType="int">
+		SELECT count(*)
+		FROM shop
+	</select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeliveryMapper">
+	<select id="selectAllDeliveries" parameterType="map" resultType="Delivery">
+	SELECT 
+		deli_seq as deliSeq,
+		deli_regdate as deliRegDate
+		<!-- open_shop as openShop, -->
+		<!-- phone_model as phoneModel, -->
+		<!-- usim_card as usimCard,
+		phone_color as phoneColor,
+		cust_name as custName,
+		phone_num as phoneNum,
+		prog_stat as progStat,
+		open_yn as openYn,
+		cust_num as custNum,
+		serial_num as serialNum,
+		invoice_num as invoiceNum,
+		usim_num as usimNum -->
+		
+	FROM delivery 
+	ORDER BY deli_seq DESC
+	limit #{startIdx},#{limit}
+	</select>
+	<select id="countDeliveries" resultType="int">
+		SELECT 
+			count(*)
+		FROM delivery
+	</select>
+</mapper>

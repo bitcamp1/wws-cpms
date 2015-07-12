@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="CreditRetrieverMapper">
+  	
+  	 
+  	 <delete id="deleteCreditRetriever" parameterType="int" >
+        DELETE FROM creditretriever
+        WHERE cred_seq=#{id}
+    </delete>
+  	<update id="editCredManage" parameterType="map">
+  		UPDATE creditretriever SET
+           cred_manage=#{value}
+        WHERE cred_seq=#{id}
+  	</update>
+  	<update id="editCredNote" parameterType="map">
+  		UPDATE creditretriever SET
+           cred_note=#{value}
+        WHERE cred_seq=#{id}
+  	</update>
+  	
+  	<update id="editCredResult" parameterType="map">
+  		UPDATE creditretriever SET
+           cred_result=#{value}
+        WHERE cred_seq=#{id}
+  	</update>
+  	<update id="updateCreditRetriever" parameterType="map">
+  		UPDATE creditretriever SET
+           cred_status=#{value}
+        WHERE cred_seq=#{id}
+  	</update>
+  	<insert id="insertCreditRetriever" parameterType="CreditRetriever">
+  		
+  		INSERT INTO creditretriever(target_name,target_num,shop_seq,telecom)
+  		VALUES(#{targetName},#{targetNum},#{shopSeq},#{telecom})
+  	
+  	</insert>
+  	
+  	<select id="getRequestListBySeq" parameterType="map" resultType="CreditRetriever">
+  		SELECT
+  			 C.cred_seq as credSeq,
+	         C.cred_regdate as credRegDate,
+	         S.shop_name as shopName,
+	         C.target_name as targetName,
+	         C.cred_status as credStatus,
+	         C.cred_result as credResult,
+	         C.cred_manage as credManage,
+	         C.cred_note as credNote,
+	         C.telecom as telecom,
+	         C.target_num as targetNum
+  		FROM
+  			creditretriever C
+		LEFT JOIN
+  			shop S
+		ON
+			C.shop_seq = S.shop_seq
+  		
+  		
+  		WHERE S.shop_seq=#{shopSeq}
+  		
+  		 ORDER BY
+  			C.cred_seq DESC
+  			LIMIT #{startIdx},#{limit}
+  		
+  	</select>
+  	<select id="selectAllCreditRetrievers" parameterType="map" resultType="CreditRetriever">
+  		SELECT
+  			 C.cred_seq as credSeq,
+	         C.cred_regdate as credRegDate,
+	         S.shop_name as shopName,
+	         C.target_name as targetName,
+	         C.cred_status as credStatus,
+	         C.cred_result as credResult,
+	         C.cred_manage as credManage,
+	         C.cred_note as credNote,
+	         C.telecom as telecom,
+	         C.target_num as targetNum
+  		FROM
+  			creditretriever C
+		LEFT JOIN
+  			shop S
+		ON
+			C.shop_seq = S.shop_seq
+  		ORDER BY
+  			C.cred_seq DESC
+  		LIMIT #{startIdx},#{limit}
+  		
+  	</select>
+  	<select id="countCreditRetrievers" resultType="int">
+  		SELECT count(*)
+  		FROM creditRetriever
+  	</select>
+  	<select id="selectAllRequests" parameterType="map" resultType="CreditRetriever">
+  		SELECT
+  			 C.cred_seq as credSeq,
+	         C.cred_regdate as credRegDate,
+	         S.shop_name as shopName,
+	         C.target_name as targetName,
+	         C.cred_status as credStatus,
+	         C.cred_result as credResult,
+	         C.cred_manage as credManage,
+	         C.cred_note as credNote,
+	         C.telecom as telecom,
+	         C.target_num as targetNum
+  		FROM
+  			creditretriever C
+		LEFT JOIN
+  			shop S
+		ON
+			C.shop_seq = S.shop_seq
+  		ORDER BY
+  			C.cred_seq DESC
+  		LIMIT ${startIdx},#{limit}
+  		
+  	</select>
+  	<select id="countRequests" resultType="int">
+  		SELECT count(*)
+  		FROM creditRetriever
+  	</select>
+  </mapper>
